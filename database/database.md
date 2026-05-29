@@ -1,4 +1,4 @@
-# Kerangka Kerja Manajemen Basis Data Kesehatan Terpadu (RME) - Windows Version
+﻿# Kerangka Kerja Manajemen Basis Data Kesehatan Terpadu (RME) - Windows Version
 
 - **Baseline System**: skema plaintext untuk data pasien dan rekam medis, tanpa ekstensi `pgcrypto`.
 - **ARIES-oriented System**: skema plaintext dengan tabel utama tetap `LOGGED`, ditambah tabel audit `audit_logs` untuk observasi recovery.
@@ -137,7 +137,7 @@ Beberapa hal yang perlu diluruskan dari versi awal dokumen:
 
 - `pgcrypto` tidak lagi dipakai untuk skenario ARIES-oriented ini.
 - Baseline dan ARIES-oriented sama-sama memakai PostgreSQL WAL; yang dibedakan adalah keberadaan tabel audit dan perlakuan schema saat recovery test.
-- Frasa “tanpa log transaksi aktif” untuk baseline kurang tepat kalau dibaca secara literal, karena PostgreSQL tetap punya WAL internal. Yang benar: baseline **tidak punya audit trail aplikasi** dan **tidak punya skema audit tambahan** seperti ARIES-oriented.
+- Frasa ΓÇ£tanpa log transaksi aktifΓÇ¥ untuk baseline kurang tepat kalau dibaca secara literal, karena PostgreSQL tetap punya WAL internal. Yang benar: baseline **tidak punya audit trail aplikasi** dan **tidak punya skema audit tambahan** seperti ARIES-oriented.
     VALUES (NULL, TG_OP, TG_TABLE_NAME, inet_client_addr(), 'SUCCESS');
     RETURN NEW;
 END;
@@ -174,7 +174,7 @@ Beberapa hal yang perlu diluruskan dari versi awal dokumen:
 
 - Klaim `pg_audit` **belum terverifikasi** di database saat ini, jadi tidak dimasukkan sebagai bagian aktif dari skema aktual.
 - Klaim `AES-256` juga **tidak ditulis sebagai fakta pasti** di sini. Untuk skenario ARIES-oriented ini, yang dipakai adalah tabel plaintext yang tetap `LOGGED`.
-- Frasa “tanpa log transaksi aktif” untuk baseline kurang tepat kalau dibaca secara literal, karena PostgreSQL tetap punya WAL internal. Yang benar: baseline **tidak punya audit trail aplikasi** dan **tidak punya skema enkripsi/trigger audit** seperti proposed.
+- Frasa ΓÇ£tanpa log transaksi aktifΓÇ¥ untuk baseline kurang tepat kalau dibaca secara literal, karena PostgreSQL tetap punya WAL internal. Yang benar: baseline **tidak punya audit trail aplikasi** dan **tidak punya skema enkripsi/trigger audit** seperti proposed.
 
 ---
 
